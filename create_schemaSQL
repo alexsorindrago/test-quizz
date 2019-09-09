@@ -1,0 +1,8 @@
+create schema test_quizz;
+
+use test_quizz;
+
+create table category (id integer primary key auto_increment, name varchar(45));
+
+create table question (id int primary key auto_increment, text varchar(100), question_type varchar(100),
+                       questions_difficulty varchar(100));
