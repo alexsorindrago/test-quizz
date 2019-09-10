@@ -1,17 +1,19 @@
-package setup.tests;
+package setup.tests.question;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import quizz.alex.daos.CategoryDAO;
 import quizz.alex.daos.EMF;
 import quizz.alex.daos.QuestionDAO;
+import quizz.alex.entity.Category;
 import quizz.alex.entity.Question;
 import quizz.alex.enums.QuestionDifficulty;
 import quizz.alex.enums.QuestionType;
 
 import javax.persistence.EntityManager;
 
-public class TestQuestionDAO {
+public class TestCreateQuestionDAO {
 
     @Before
     public void delete() {
@@ -23,31 +25,21 @@ public class TestQuestionDAO {
     }
 
     @Test
-    public void testCreateQuestion() {
+    public void testQuestion() {
+        CategoryDAO categoryDAO = new CategoryDAO();
         QuestionDAO questionDAO = new QuestionDAO();
+
+        Category category = new Category();
+        category.setName("alex");
+        categoryDAO.create(category);
 
         Question question = new Question();
         question.setText("theQuestion");
         question.setQuestionType(QuestionType.OPEN);
         question.setQuestionDifficulty(QuestionDifficulty.LOW);
+        question.setCategory(category);
 
-        // test create question
         questionDAO.create(question);
-
-        // test read question
-        Question toTest = questionDAO.read(question.getId());
-        Assert.assertNotNull(toTest);
-
-        // test update
-        Question updateTest = questionDAO.read(question.getId());
-
-        updateTest.setText("alexandrovich");
-        questionDAO.update(updateTest);
-
-
-        Question verifyUpdate = questionDAO.read(question.getId());
-        Assert.assertEquals("alexandrovich", verifyUpdate.getText());
-
 
         // test remove
         Question testRemove = questionDAO.read(question.getId());

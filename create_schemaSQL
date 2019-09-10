@@ -1,8 +1,27 @@
 create schema test_quizz;
 
-use test_quizz;
+CREATE TABLE category (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(45) NOT NULL
+);
 
-create table category (id integer primary key auto_increment, name varchar(45));
+CREATE TABLE question (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    text VARCHAR(100),
+    question_type VARCHAR(45) NOT NULL CHECK (question_type = 'OPEN'
+        OR question_type = 'CHOICE'),
+    question_difficulty VARCHAR(45) NOT NULL CHECK (question_difficulty = 'LOW'
+        OR question_difficulty = 'MEDIUM'
+        OR question_difficulty = 'HIGH')
+);
 
-create table question (id int primary key auto_increment, text varchar(100), question_type varchar(100),
-                       questions_difficulty varchar(100));
+
+CREATE TABLE candidate (
+    id INT,
+    email VARCHAR(45) PRIMARY KEY NOT NULL,
+    surname VARCHAR(45) NOT NULL,
+    name VARCHAR(45) NOT NULL
+);
+
+alter table question add column category int;
+alter table question add foreign key (category) references category(id);

@@ -8,7 +8,7 @@ import javax.persistence.EntityNotFoundException;
 public class CategoryDAO {
 
     public void create(Category category) {
-        EntityManager em = EMF.createEM();
+        EntityManager em = new EMF().createEM();
 
         em.getTransaction().begin();
         em.persist(category);
@@ -22,7 +22,7 @@ public class CategoryDAO {
     public Category read(int id) {
         EntityManager em = EMF.createEM();
         em.getTransaction().begin();
-        Category category = em.find(Category.class, 1);
+        Category category = em.find(Category.class, id);
         em.getTransaction().commit();
         em.close();
         return category;

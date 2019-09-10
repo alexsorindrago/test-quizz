@@ -10,12 +10,26 @@ import javax.persistence.*;
 public class Question extends TemplateEntity {
 
     private String text;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "question_difficulty")
     private QuestionDifficulty questionDifficulty;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "question_type")
     private QuestionType questionType;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "category", referencedColumnName = "id")
+    Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public QuestionDifficulty getQuestionDifficulty() {
         return questionDifficulty;
