@@ -1,13 +1,19 @@
 create schema test_quizz;
 
+drop table category;
+drop table question;
+drop table candidate;
+drop table topic;
+drop table answer;
+
 CREATE TABLE category (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(45) NOT NULL
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(45)
 );
 
 CREATE TABLE question (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    text VARCHAR(100),
+    text VARCHAR(100) NOT NULL,
     question_type VARCHAR(45) NOT NULL CHECK (question_type = 'OPEN'
         OR question_type = 'CHOICE'),
     question_difficulty VARCHAR(45) NOT NULL CHECK (question_difficulty = 'LOW'
@@ -17,11 +23,29 @@ CREATE TABLE question (
 
 
 CREATE TABLE candidate (
-    id INT,
-    email VARCHAR(45) PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(45) NOT NULL,
     surname VARCHAR(45) NOT NULL,
     name VARCHAR(45) NOT NULL
 );
 
+
 alter table question add column category int;
 alter table question add foreign key (category) references category(id);
+
+CREATE TABLE topic (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    number_of_questions INT,
+    difficulty VARCHAR(45) NOT NULL CHECK (difficulty = 'LOW'
+        OR difficulty = 'MEDIUM'
+        OR difficulty = 'HIGH')
+);
+
+CREATE TABLE answer (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    text VARCHAR(45) NOT NULL,
+    value INT NOT NULL
+)
+
+
+

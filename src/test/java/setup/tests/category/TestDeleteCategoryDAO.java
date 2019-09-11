@@ -20,7 +20,7 @@ public class TestDeleteCategoryDAO {
     }
 
     @Test
-    public void testDelete() {
+    public void deleteCategoty() {
         CategoryDAO categoryDAO = new CategoryDAO();
         Category category = new Category();
         category.setName("alex");

@@ -25,7 +25,7 @@ public class TestCreateQuestionDAO {
     }
 
     @Test
-    public void testQuestion() {
+    public void createQuestion() {
         CategoryDAO categoryDAO = new CategoryDAO();
         QuestionDAO questionDAO = new QuestionDAO();
 

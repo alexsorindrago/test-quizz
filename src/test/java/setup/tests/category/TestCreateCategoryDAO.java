@@ -23,7 +23,7 @@ public class TestCreateCategoryDAO {
     }
 
     @Test
-    public void testCreate() {
+    public void createCategory() {
 
         CategoryDAO categoryDAO = new CategoryDAO();
         Category category = new Category();
