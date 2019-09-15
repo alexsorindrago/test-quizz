@@ -17,6 +17,8 @@ public class TestCreateCategoryDAO {
     public void delete() {
         EntityManager entityManager = EMF.createEM();
         entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("delete from answer").executeUpdate();
+        entityManager.createNativeQuery("delete from question").executeUpdate();
         entityManager.createNativeQuery("delete from category").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -31,12 +33,6 @@ public class TestCreateCategoryDAO {
 
         categoryDAO.create(category);
 
-        // test remove
-        Category testRemove = categoryDAO.read(category.getId());
-        categoryDAO.delete(testRemove);
-
-        Category verifyRemove = categoryDAO.read(category.getId());
-        Assert.assertNull(verifyRemove);
-
+        Assert.assertNotNull(category);
     }
 }

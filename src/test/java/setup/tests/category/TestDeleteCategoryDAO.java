@@ -14,13 +14,15 @@ public class TestDeleteCategoryDAO {
     public void delete() {
         EntityManager entityManager = EMF.createEM();
         entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("delete from answer").executeUpdate();
+        entityManager.createNativeQuery("delete from question").executeUpdate();
         entityManager.createNativeQuery("delete from category").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
     }
 
     @Test
-    public void deleteCategoty() {
+    public void deleteCategory() {
         CategoryDAO categoryDAO = new CategoryDAO();
         Category category = new Category();
         category.setName("alex");

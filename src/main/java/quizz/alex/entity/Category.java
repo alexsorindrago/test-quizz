@@ -12,6 +12,7 @@ public class Category extends TemplateEntity {
     @Column(nullable = false)
     private String name;
 
+
     public String getName() {
         return name;
     }

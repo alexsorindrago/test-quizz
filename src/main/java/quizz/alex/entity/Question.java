@@ -4,6 +4,8 @@ import quizz.alex.enums.QuestionDifficulty;
 import quizz.alex.enums.QuestionType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "question")
@@ -19,9 +21,24 @@ public class Question extends TemplateEntity {
     @Column(name = "question_type")
     private QuestionType questionType;
 
+    @OneToMany(mappedBy = "question")
+    private final List<Answer> answers = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "test_question",
+            joinColumns = {@JoinColumn(name = "question_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "test_id", referencedColumnName = "id")})
+    private final List<Testing> testings = new ArrayList<>();
     @ManyToOne(optional = false)
     @JoinColumn(name = "category", referencedColumnName = "id")
-    Category category;
+    private Category category;
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public List<Testing> getTestings() {
+        return testings;
+    }
 
     public Category getCategory() {
         return category;

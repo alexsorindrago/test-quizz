@@ -5,6 +5,7 @@ drop table question;
 drop table candidate;
 drop table topic;
 drop table answer;
+drop table test;
 
 CREATE TABLE category (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,6 +22,9 @@ CREATE TABLE question (
         OR question_difficulty = 'HIGH')
 );
 
+alter table question add column category int;
+alter table question add foreign key (category) references category(id);
+
 
 CREATE TABLE candidate (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,9 +33,6 @@ CREATE TABLE candidate (
     name VARCHAR(45) NOT NULL
 );
 
-
-alter table question add column category int;
-alter table question add foreign key (category) references category(id);
 
 CREATE TABLE topic (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -44,8 +45,21 @@ CREATE TABLE topic (
 CREATE TABLE answer (
     id INT PRIMARY KEY AUTO_INCREMENT,
     text VARCHAR(45) NOT NULL,
-    value INT NOT NULL
-)
+    value boolean NOT NULL
+);
 
+alter table answer add column question int;
+alter table answer add foreign key (question) references question(id);
 
+CREATE TABLE test (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    creation_date timestamp NOT NULL
+);
 
+create table test_question(
+question_id int,
+test_id int);
+
+alter table test_question add foreign key (question_id) references question(id);
+alter table test_question add foreign key (test_id)references test(id);
+alter table test_question add primary key (question_id, test_id);

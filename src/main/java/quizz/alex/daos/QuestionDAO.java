@@ -4,6 +4,7 @@ import quizz.alex.entity.Question;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 public class QuestionDAO {
 
@@ -29,6 +30,7 @@ public class QuestionDAO {
 
     public void update(Question question) {
         EntityManager em = EMF.createEM();
+
         em.getTransaction().begin();
         Question existing = em.find(Question.class, question.getId());
 
@@ -57,4 +59,8 @@ public class QuestionDAO {
     }
 
 
+    public List<Question> findAll() {
+        //TODO
+        return null;
+    }
 }

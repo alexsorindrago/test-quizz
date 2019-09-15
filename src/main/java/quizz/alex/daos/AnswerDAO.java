@@ -35,10 +35,10 @@ public class AnswerDAO {
         Answer existing = em.find(Answer.class, answer.getId());
 
         if (existing == null) {
-            throw new EntityNotFoundException("value not found");
+            throw new EntityNotFoundException("entity not found");
         }
         existing.setText("value text");
-        existing.setValue(answer.getValue());
+        existing.setValue(answer.isValue());
 
         em.getTransaction().commit();
         em.close();

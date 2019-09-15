@@ -1,5 +1,6 @@
 package setup.tests.candidate;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import quizz.alex.daos.CandidateDAO;
@@ -29,5 +30,7 @@ public class TestCreateCandidateDAO {
         candidate.setName("Alex");
 
         candidateDAO.create(candidate);
+
+        Assert.assertNotNull(candidate);
     }
 }

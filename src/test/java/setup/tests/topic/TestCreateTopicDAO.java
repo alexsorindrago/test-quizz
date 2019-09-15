@@ -1,5 +1,6 @@
 package setup.tests.topic;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import quizz.alex.daos.EMF;
@@ -29,6 +30,8 @@ public class TestCreateTopicDAO {
         topic.setTopicDifficulty(TopicDifficulty.LOW);
 
         topicDAO.create(topic);
+
+        Assert.assertNotNull(topic);
 
     }
 }

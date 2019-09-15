@@ -1,9 +1,7 @@
 package quizz.alex.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "answer")
@@ -13,7 +11,19 @@ public class Answer extends TemplateEntity {
     private String text;
 
     @Column(name = "value")
-    private int value;
+    private boolean value;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "question", referencedColumnName = "id")
+    private Question question;
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 
     public String getText() {
         return text;
@@ -23,11 +33,11 @@ public class Answer extends TemplateEntity {
         this.text = text;
     }
 
-    public int getValue() {
+    public boolean isValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(boolean value) {
         this.value = value;
     }
 }

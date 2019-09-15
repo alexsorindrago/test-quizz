@@ -14,6 +14,8 @@ public class TestReadCategoryDAO {
     public void delete() {
         EntityManager entityManager = EMF.createEM();
         entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("delete from answer").executeUpdate();
+        entityManager.createNativeQuery("delete from question").executeUpdate();
         entityManager.createNativeQuery("delete from category").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
